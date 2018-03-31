@@ -45,6 +45,7 @@ public class client {
 				
 				case "put":
 					// load file
+					System.out.println(filepath.toString());
 					byte[] file = Files.readAllBytes(filepath);
 					// write "put"
 					out.writeUTF("put");
