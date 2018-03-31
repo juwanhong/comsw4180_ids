@@ -60,6 +60,8 @@ public class client {
 					// write file
 					out.write(file);
 					
+					out.flush();
+					
 					// wait for server reply
 					String msgPut = in.readUTF();
 					System.out.println(msgPut);
@@ -74,6 +76,8 @@ public class client {
 					out.writeInt(0);
 					//write null file
 					out.write(0);
+					
+					out.flush();
 					
 					// wait for server file
 					int serverFileLength = in.readInt();
@@ -96,6 +100,8 @@ public class client {
 					//write null file
 					out.write(0);
 					
+					out.flush();
+					
 					// wait for server file list
 					String fileList = in.readUTF();
 					
@@ -110,6 +116,8 @@ public class client {
 					out.writeInt(0);
 					//write null file
 					out.write(0);
+					
+					out.flush();
 					
 					// wait for server to acknowledge exit
 					String serverExit = in.readUTF();
