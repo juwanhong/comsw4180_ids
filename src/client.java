@@ -33,6 +33,7 @@ public class client {
 				String commands1 = scanner.next().toString();
 				System.out.println(commands1);
 				String[] commands = commands1.split(" ");
+				String command = commands[0];
 				if(commands.length == 2) {
 					filename = commands[1];
 					System.out.println(filename);
