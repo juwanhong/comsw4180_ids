@@ -55,12 +55,64 @@ public class client {
 					// write file
 					out.write(file);
 					
+					// wait for server reply
+					String msgPut = in.readUTF();
+					System.out.println(msgPut);
+										
 					
 				case "get":
+					// write "get"
+					out.writeUTF("get");
+					//write empty filename
+					out.writeUTF(filename);
+					//write file packet length of 0
+					out.writeInt(0);
+					//write null file
+					out.write(null);
+					
+					// wait for server file
+					int serverFileLength = in.readInt();
+					byte[] serverFile = new byte[serverFileLength];
+					in.read(serverFile);
+					
+					// save serverFile to /files
+					Path putPath = Paths.get(fileFolder + "/" + filename);
+					Files.write(putPath, serverFile);
+					
+					System.out.println("File saved to /files.");
 					
 				case "ls":
+					// write "ls"
+					out.writeUTF("ls");
+					//write empty filename
+					out.writeUTF("");
+					//write file packet length
+					out.writeInt(0);
+					//write null file
+					out.write(null);
+					
+					// wait for server file list
+					String fileList = in.readUTF();
+					
+					System.out.println(fileList);
 					
 				case "exit":
+					// write "exit"
+					out.writeUTF("exit");
+					//write empty filename
+					out.writeUTF("");
+					//write file packet length
+					out.writeInt(0);
+					//write null file
+					out.write(null);
+					
+					// wait for server to acknowledge exit
+					String serverExit = in.readUTF();
+					
+					System.out.println(serverExit);
+					clientSocket.close();
+					
+					break;
 					
 				default:
 					
