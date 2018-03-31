@@ -31,7 +31,8 @@ public class client {
 			while(true) {
 				System.out.print(">>> ");
 				String[] commands = scanner.next().toString().split(" ");
-				System.out.println(commands);
+				System.out.println(commands[0]);
+				System.out.println(commands[1]);
 				String command = commands[0];
 				if(commands.length == 2) {
 					filename = commands[1];
