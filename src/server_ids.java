@@ -46,6 +46,7 @@ public class server_ids {
 				
 				// read first input: command
 				String command = clientIn.readUTF();
+				System.out.println("command: " + command);
 				// read file name
 				String filename = clientIn.readUTF();
 				// read client file size
@@ -85,6 +86,8 @@ public class server_ids {
 					
 					// write back to client
 					clientOut.writeUTF(msgPut);
+					System.out.println(msgPut);
+					
 					
 				case "get":
 					// get file
