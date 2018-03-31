@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 public class server_ids {
 
 	public static void main(String args[]) {
-		int port = Integer.parseInt(args[1]);
+		int port = Integer.parseInt(args[0]);
 		
 		String fileFolder = Paths.get("").toAbsolutePath().toString()+"/files";
 		

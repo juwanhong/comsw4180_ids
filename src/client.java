@@ -11,11 +11,11 @@ import java.util.Scanner;
 
 public class client {
 	
-	public static void Client(String[] clientArgs) {
+	public static void main(String[] clientArgs) {
 		
 		try {
-			InetAddress idsIP = InetAddress.getByName(clientArgs[1]);
-			int idsPort = Integer.parseInt(clientArgs[2]);
+			InetAddress idsIP = InetAddress.getByName(clientArgs[0]);
+			int idsPort = Integer.parseInt(clientArgs[1]);
 			String fileFolder = Paths.get("").toAbsolutePath().toString()+"/files";
 			String filename = "";
 			Path filepath = null;

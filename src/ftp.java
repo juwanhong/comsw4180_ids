@@ -8,7 +8,6 @@ public class ftp {
 		switch(mode) {
 		
 		case "client":
-			client.Client(args);
 			
 		case "server":
 			server.Server(args);
