@@ -5,7 +5,17 @@ public class ftp {
 		
 		String mode = args[0];
 		
+		switch(mode) {
 		
+		case "client":
+			client.Client(args);
+			
+		case "server":
+			server.Server(args);
+			
+		default:
+			System.out.println("error");
+		}
 	}
 
 }
