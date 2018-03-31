@@ -42,7 +42,7 @@ public class server_ids {
 			// but server would not process them.
 			while(true) {
 				// print console message
-				System.out.println(">> Waiting for client connection...");
+				System.out.println(">> Waiting for client command...");
 				
 				// read first input: command
 				String command = clientIn.readUTF();

@@ -34,7 +34,7 @@ public class client {
 				String command = commands[0];
 				if(commands.length == 2) {
 					filename = commands[1];
-					filepath = Paths.get(fileFolder + filename);		
+					filepath = Paths.get(fileFolder + "/" + filename);		
 				}
 				else if(commands.length >= 3) {
 					System.out.println("Input invalid!");
@@ -68,7 +68,7 @@ public class client {
 					//write file packet length of 0
 					out.writeInt(0);
 					//write null file
-					out.write(null);
+					out.write(0);
 					
 					// wait for server file
 					int serverFileLength = in.readInt();
@@ -89,7 +89,7 @@ public class client {
 					//write file packet length
 					out.writeInt(0);
 					//write null file
-					out.write(null);
+					out.write(0);
 					
 					// wait for server file list
 					String fileList = in.readUTF();
@@ -104,7 +104,7 @@ public class client {
 					//write file packet length
 					out.writeInt(0);
 					//write null file
-					out.write(null);
+					out.write(0);
 					
 					// wait for server to acknowledge exit
 					String serverExit = in.readUTF();
