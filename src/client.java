@@ -22,13 +22,15 @@ public class client {
 			
 			// Open socket to ids and input/output streams
 			Socket clientSocket = new Socket(idsIP, idsPort);
-			DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
-			DataInputStream in = new DataInputStream(clientSocket.getInputStream());
+			
 			
 			// Set up scanner for user input
 			Scanner scanner = new Scanner(System.in);
 			
 			while(true) {
+				DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
+				DataInputStream in = new DataInputStream(clientSocket.getInputStream());
+				
 				System.out.print(">>> ");
 				String commands1 = scanner.nextLine().toString();
 				System.out.println(commands1);
@@ -61,6 +63,7 @@ public class client {
 					out.write(file);
 					
 					out.flush();
+					out.close();
 					
 					// wait for server reply
 					String msgPut = in.readUTF();
@@ -78,6 +81,7 @@ public class client {
 					out.write(0);
 					
 					out.flush();
+					out.close();
 					
 					// wait for server file
 					int serverFileLength = in.readInt();
@@ -101,6 +105,7 @@ public class client {
 					out.write(0);
 					
 					out.flush();
+					out.close();
 					
 					// wait for server file list
 					String fileList = in.readUTF();
@@ -118,6 +123,7 @@ public class client {
 					out.write(0);
 					
 					out.flush();
+					out.close();
 					
 					// wait for server to acknowledge exit
 					String serverExit = in.readUTF();

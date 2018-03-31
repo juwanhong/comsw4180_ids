@@ -28,9 +28,7 @@ public class server_ids {
 			// Get server ip (same as ids)
 			InetAddress serverIP = InetAddress.getLocalHost();
 			
-			// open input/output datastreams for client and server
-			DataOutputStream clientOut = new DataOutputStream(clientSocket.getOutputStream());
-			DataInputStream clientIn = new DataInputStream(clientSocket.getInputStream());		
+				
 			
 			// First receive all packets from client.
 			// Order of packets are:
@@ -41,6 +39,10 @@ public class server_ids {
 			// Note that if 2,3,4 are 0 or null, ids should still perform check for patterns
 			// but server would not process them.
 			while(true) {
+				// open input/output datastreams for client and server
+				DataOutputStream clientOut = new DataOutputStream(clientSocket.getOutputStream());
+				DataInputStream clientIn = new DataInputStream(clientSocket.getInputStream());	
+				
 				// print console message
 				System.out.println(">> Waiting for client command...");
 				
