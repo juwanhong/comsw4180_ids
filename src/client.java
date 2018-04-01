@@ -31,7 +31,7 @@ public class client {
 			
 			while(true) {
 				System.out.print(">>> ");
-				String commands1 = scanner.nextLine().toString();
+				String commands1 = scanner.next().toString();
 				System.out.println(commands1);
 				String[] commands = commands1.split(" ");
 				String command = commands[0];
