@@ -137,6 +137,10 @@ public class client {
 				}
 				
 				out.flush();
+				
+				if (scanner.hasNextLine()) {
+					scanner.nextLine();
+				}
 			}
 			
 		} catch (UnknownHostException e) {
