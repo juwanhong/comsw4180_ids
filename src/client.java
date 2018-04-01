@@ -141,7 +141,7 @@ public class client {
 					System.out.println(serverExit);
 					clientSocket.close();
 					
-					break;
+					return;
 					
 				default:
 					continue;

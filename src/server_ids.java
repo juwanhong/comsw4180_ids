@@ -135,8 +135,10 @@ public class server_ids {
 					// write msg back to client
 					clientOut.writeUTF(msgExit);
 					
+					System.out.println(msgExit);
+					
 					//exit
-					break;
+					return;
 					
 				default:
 					// bad command
