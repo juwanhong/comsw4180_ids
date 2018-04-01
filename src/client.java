@@ -1,3 +1,4 @@
+import java.io.Console;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -28,10 +29,11 @@ public class client {
 			
 			// Set up scanner for user input
 			Scanner scanner = new Scanner(System.in);
+			Console console = System.console();
 			
 			while(true) {
 				System.out.print(">>> ");
-				String commands1 = scanner.next().toString();
+				String commands1 = console.readLine();
 				System.out.println(commands1);
 				String[] commands = commands1.split(" ");
 				String command = commands[0];
@@ -44,10 +46,6 @@ public class client {
 				else if(commands.length >= 3) {
 					System.out.println("Input invalid!");
 					continue;
-				}
-				
-				if (scanner.hasNextLine()) {
-					scanner.nextLine();
 				}
 				
 				switch(command) {
