@@ -83,7 +83,7 @@ public class client {
 					//write empty filename
 					out.writeUTF(filename);
 					//write file packet length of 0
-					out.writeInt(0);
+					out.writeInt(1);
 					//write null file
 					out.write(0);
 					
@@ -109,7 +109,7 @@ public class client {
 					//write empty filename
 					out.writeUTF("");
 					//write file packet length
-					out.writeInt(0);
+					out.writeInt(1);
 					//write null file
 					out.write(0);
 					
@@ -129,7 +129,7 @@ public class client {
 					//write empty filename
 					out.writeUTF("");
 					//write file packet length
-					out.writeInt(0);
+					out.writeInt(1);
 					//write null file
 					out.write(0);
 					
