@@ -49,6 +49,7 @@ public class client {
 				switch(command) {
 				
 				case "put":
+					System.out.println("In case: put");
 					// load file
 					System.out.println(filepath.toString());
 					byte[] file = Files.readAllBytes(filepath);
@@ -70,6 +71,7 @@ public class client {
 										
 					
 				case "get":
+					System.out.println("In case: get");
 					// write "get"
 					out.writeUTF("get");
 					//write empty filename
@@ -93,6 +95,7 @@ public class client {
 					continue;
 					
 				case "ls":
+					System.out.println("In case: ls");
 					// write "ls"
 					out.writeUTF("ls");
 					//write empty filename
@@ -110,6 +113,7 @@ public class client {
 					continue;
 					
 				case "exit":
+					System.out.println("In case: exit");
 					// write "exit"
 					out.writeUTF("exit");
 					//write empty filename
