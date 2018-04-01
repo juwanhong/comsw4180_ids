@@ -88,6 +88,8 @@ public class server_ids {
 					clientOut.writeUTF(msgPut);
 					System.out.println(msgPut);
 					
+					continue;
+					
 					
 				case "get":
 					// get file
@@ -101,6 +103,8 @@ public class server_ids {
 					// write file back to client
 					clientOut.writeInt(getFile.length);
 					clientOut.write(getFile);
+					
+					continue;
 					
 					
 				case "ls":
@@ -118,6 +122,8 @@ public class server_ids {
 					// write ls back to client
 					clientOut.writeUTF(lsNames);
 					
+					continue;
+					
 				case "exit":
 					// return exit message to client
 					String msgExit = "Connection exiting...";
@@ -134,6 +140,8 @@ public class server_ids {
 				default:
 					// bad command
 					System.out.println("Bad command.");
+					
+					continue;
 						
 				}
 			}
