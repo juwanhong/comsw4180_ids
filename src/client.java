@@ -29,9 +29,10 @@ public class client {
 			
 			// Set up scanner for user input
 			Scanner scanner = new Scanner(System.in);
-			Console console = System.console();
+			
 			
 			while(true) {
+				Console console = System.console();
 				System.out.print(">>> ");
 				String commands1 = console.readLine();
 				System.out.println(commands1);
