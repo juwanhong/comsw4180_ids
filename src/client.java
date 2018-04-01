@@ -46,6 +46,10 @@ public class client {
 					continue;
 				}
 				
+				if (scanner.hasNextLine()) {
+					scanner.nextLine();
+				}
+				
 				switch(command) {
 				
 				case "put":
@@ -136,11 +140,8 @@ public class client {
 					
 				}
 				
-				out.flush();
+		
 				
-				if (scanner.hasNextLine()) {
-					scanner.nextLine();
-				}
 			}
 			
 		} catch (UnknownHostException e) {
