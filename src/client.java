@@ -29,15 +29,16 @@ public class client {
 			
 			// Set up scanner for user input
 			Scanner scanner = new Scanner(System.in);
+			String[] commands;
+			String commands1, command;
 			
 			
 			while(true) {
-				Console console = System.console();
 				System.out.print(">>> ");
-				String commands1 = console.readLine();
+				commands1 = scanner.nextLine();
 				System.out.println(commands1);
-				String[] commands = commands1.split(" ");
-				String command = commands[0];
+				commands = commands1.split(" ");
+				command = commands[0];
 				if(commands.length == 2) {
 					filename = commands[1];
 					System.out.println(filename);
