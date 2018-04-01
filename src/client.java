@@ -65,6 +65,8 @@ public class client {
 					// wait for server reply
 					String msgPut = in.readUTF();
 					System.out.println(msgPut);
+					
+					continue;
 										
 					
 				case "get":
@@ -88,6 +90,8 @@ public class client {
 					
 					System.out.println("File saved to /files.");
 					
+					continue;
+					
 				case "ls":
 					// write "ls"
 					out.writeUTF("ls");
@@ -102,6 +106,8 @@ public class client {
 					String fileList = in.readUTF();
 					
 					System.out.println(fileList);
+					
+					continue;
 					
 				case "exit":
 					// write "exit"
@@ -122,6 +128,7 @@ public class client {
 					break;
 					
 				default:
+					continue;
 					
 				}
 				
