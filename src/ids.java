@@ -77,7 +77,7 @@ public class ids {
 	    
 	    try {
 	    	String curDir = Paths.get("").toAbsolutePath().toString();
-			fh = new FileHandler(curDir + "/ids.log");
+			fh = new FileHandler(curDir + "/ids.log", true);
 			logger.addHandler(fh);
 			
 			SimpleFormatter formatter = new SimpleFormatter();  
