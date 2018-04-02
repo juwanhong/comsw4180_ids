@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -75,7 +76,8 @@ public class ids {
 	    FileHandler fh;
 	    
 	    try {
-			fh = new FileHandler("/ids.log");
+	    	String curDir = Paths.get("").toAbsolutePath().toString();
+			fh = new FileHandler(curDir + "/ids.log");
 			logger.addHandler(fh);
 			
 			SimpleFormatter formatter = new SimpleFormatter();  
