@@ -71,7 +71,8 @@ public class server_ids {
 				int checkFile = ids.checkPattern(clientFile,clientAddress);
 				
 				if((checkCommand+checkName+checkLength+checkFile) != 0) {
-					
+					System.out.println("Pattern has been matched.");
+					continue;
 				}
 				
 				// Server portion:
@@ -89,6 +90,11 @@ public class server_ids {
 					// IDS portion: server -->> client
 					int checkPutReturn = ids.checkPattern(msgPut.getBytes(),serverAddress);
 					
+					if(checkPutReturn != 0) {
+						System.out.println("Pattern has been matched");
+						continue;
+					}
+					
 					// write back to client
 					clientOut.writeUTF(msgPut);
 					System.out.println(msgPut);
@@ -104,6 +110,11 @@ public class server_ids {
 					// IDS portion: server -->> client
 					int checkGetReturnLength = ids.checkPattern(BigInteger.valueOf(getFile.length).toByteArray(),serverAddress);
 					int checkGetReturnFile = ids.checkPattern(getFile,serverAddress);
+					
+					if(checkGetReturnLength + checkGetReturnFile != 0) {
+						System.out.println("Pattern has been matched");
+						continue;
+					}
 					
 					// write file back to client
 					clientOut.writeInt(getFile.length);
@@ -124,6 +135,11 @@ public class server_ids {
 					// IDS portion: server -->> client
 					int checkLS = ids.checkPattern(lsNames.getBytes(),serverAddress);
 					
+					if(checkLS != 0) {
+						System.out.println("Pattern has been matched");
+						continue;
+					}
+					
 					// write ls back to client
 					clientOut.writeUTF(lsNames);
 					
@@ -135,6 +151,11 @@ public class server_ids {
 					
 					// IDS portion: server -->> client
 					int checkExit = ids.checkPattern(msgExit.getBytes(),serverAddress);
+					
+					if(checkExit != 0) {
+						System.out.println("Pattern has been matched");
+						continue;
+					}
 					
 					// write msg back to client
 					clientOut.writeUTF(msgExit);

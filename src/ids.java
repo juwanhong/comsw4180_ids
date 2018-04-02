@@ -87,6 +87,8 @@ public class ids {
 	        	logger.warning("Pattern Found: " + i + "	From: " + address);
 	        }
 	        
+	        fh.close();
+	        
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

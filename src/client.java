@@ -4,6 +4,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -70,8 +71,16 @@ public class client {
 					
 				
 					// wait for server reply
-					String msgPut = in.readUTF();
-					System.out.println(msgPut);
+					clientSocket.setSoTimeout(3000);
+					try {
+						String msgPut = in.readUTF();
+						System.out.println(msgPut);
+					}
+					catch (SocketTimeoutException e) {
+						System.out.println("Packets dropped due to pattern match.");
+						continue;
+					}
+			
 					
 					continue;
 										
@@ -92,7 +101,15 @@ public class client {
 					// wait for server file
 					int serverFileLength = in.readInt();
 					byte[] serverFile = new byte[serverFileLength];
-					in.read(serverFile);
+					
+					clientSocket.setSoTimeout(3000);
+					try {
+						in.read(serverFile);
+					}
+					catch (SocketTimeoutException e) {
+						System.out.println("Packets dropped due to pattern match.");
+						continue;
+					}
 					
 					// save serverFile to /files
 					Path putPath = Paths.get(fileFolder + "/" + filename);
@@ -116,9 +133,17 @@ public class client {
 					out.flush();
 					
 					// wait for server file list
-					String fileList = in.readUTF();
+					clientSocket.setSoTimeout(3000);
+					try {
+						String fileList = in.readUTF();
+						System.out.println(fileList);
+					}
+					catch (SocketTimeoutException e) {
+						System.out.println("Packets dropped due to pattern match.");
+						continue;
+					}
 					
-					System.out.println(fileList);
+					
 					
 					continue;
 					
@@ -136,9 +161,16 @@ public class client {
 					out.flush();
 					
 					// wait for server to acknowledge exit
-					String serverExit = in.readUTF();
+					clientSocket.setSoTimeout(3000);
+					try{
+						String serverExit = in.readUTF();
+						System.out.println(serverExit);
+					}
+					catch (SocketTimeoutException e) {
+						System.out.println("Packets dropped due to pattern match.");
+						continue;
+					}
 					
-					System.out.println(serverExit);
 					clientSocket.close();
 					
 					return;
