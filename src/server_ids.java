@@ -24,6 +24,8 @@ public class server_ids {
 			
 			// Accept connection from client
 			Socket clientSocket = idsServerSocket.accept();
+			String clientAddress = clientSocket.getRemoteSocketAddress().toString();
+			String serverAddress = clientSocket.getLocalAddress().toString();
 			
 			// Get server ip (same as ids)
 			InetAddress serverIP = InetAddress.getLocalHost();
@@ -61,10 +63,10 @@ public class server_ids {
 				// run byte[] through ids.checkPattern and return pattern match number
 				// if not 0, log issue and respond to client in correct fashion.
 				// if 0, go on to server side processing
-				int checkCommand = ids.checkPattern(command.getBytes());
-				int checkName = ids.checkPattern(filename.getBytes());
-				int checkLength = ids.checkPattern(BigInteger.valueOf(lengthClient).toByteArray());
-				int checkFile = ids.checkPattern(clientFile);
+				int checkCommand = ids.checkPattern(command.getBytes(),clientAddress);
+				int checkName = ids.checkPattern(filename.getBytes(),clientAddress);
+				int checkLength = ids.checkPattern(BigInteger.valueOf(lengthClient).toByteArray(),clientAddress);
+				int checkFile = ids.checkPattern(clientFile,clientAddress);
 				
 				if((checkCommand+checkName+checkLength+checkFile) != 0) {
 					
@@ -83,7 +85,7 @@ public class server_ids {
 					String msgPut = "File <" + filename + "> saved.";
 					
 					// IDS portion: server -->> client
-					int checkPutReturn = ids.checkPattern(msgPut.getBytes());
+					int checkPutReturn = ids.checkPattern(msgPut.getBytes(),serverAddress);
 					
 					// write back to client
 					clientOut.writeUTF(msgPut);
@@ -98,8 +100,8 @@ public class server_ids {
 					byte[] getFile = Files.readAllBytes(getPath);
 					
 					// IDS portion: server -->> client
-					int checkGetReturnLength = ids.checkPattern(BigInteger.valueOf(getFile.length).toByteArray());
-					int checkGetReturnFile = ids.checkPattern(getFile);
+					int checkGetReturnLength = ids.checkPattern(BigInteger.valueOf(getFile.length).toByteArray(),serverAddress);
+					int checkGetReturnFile = ids.checkPattern(getFile,serverAddress);
 					
 					// write file back to client
 					clientOut.writeInt(getFile.length);
@@ -118,7 +120,7 @@ public class server_ids {
 					}
 					
 					// IDS portion: server -->> client
-					int checkLS = ids.checkPattern(lsNames.getBytes());
+					int checkLS = ids.checkPattern(lsNames.getBytes(),serverAddress);
 					
 					// write ls back to client
 					clientOut.writeUTF(lsNames);
@@ -130,7 +132,7 @@ public class server_ids {
 					String msgExit = "Connection exiting...";
 					
 					// IDS portion: server -->> client
-					int checkExit = ids.checkPattern(msgExit.getBytes());
+					int checkExit = ids.checkPattern(msgExit.getBytes(),serverAddress);
 					
 					// write msg back to client
 					clientOut.writeUTF(msgExit);
