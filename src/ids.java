@@ -17,7 +17,7 @@ public class ids {
 	private static ArrayList<String> patterns;
 	
 	
-	public static void readPattern(String filePath){
+	public static void readPattern(){
 		patterns = new ArrayList<String>();
 		
 		// read file line-by-line as String and remove any spaces

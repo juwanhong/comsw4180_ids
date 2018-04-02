@@ -19,6 +19,8 @@ public class server_ids {
 		
 				
 		try {
+			// load patterns into ids
+			ids.readPattern();
 			// Create ServerSocket for ids to listen for client connections
 			ServerSocket idsServerSocket = new ServerSocket(port);
 			
