@@ -57,7 +57,15 @@ public class client {
 					System.out.println("In case: put");
 					// load file
 					System.out.println(filepath.toString());
-					byte[] file = Files.readAllBytes(filepath);
+					byte[] file;
+					try {
+						file = Files.readAllBytes(filepath);
+					}
+					catch (IOException e) {
+						System.out.println("File not found - check name.");
+						continue;
+					}
+					
 					// write "put"
 					out.writeUTF("put");
 					// write filename
@@ -99,12 +107,25 @@ public class client {
 					out.flush();
 					
 					// wait for server file
-					int serverFileLength = in.readInt();
-					byte[] serverFile = new byte[serverFileLength];
+					String okMsg;
+					int serverFileLength;
+					byte[] serverFile = null;
 					
-					clientSocket.setSoTimeout(3000);
+					clientSocket.setSoTimeout(5000);
 					try {
-						in.read(serverFile);
+						okMsg = in.readUTF();
+						
+						if (okMsg.equals("ok")) {
+							serverFileLength = in.readInt();
+							serverFile = new byte[serverFileLength];
+							in.read(serverFile);
+						}
+						
+						else if(okMsg.equals("no")) {
+							String errorMsg = in.readUTF();
+							System.out.println(errorMsg);
+							continue;
+						}
 					}
 					catch (SocketTimeoutException e) {
 						System.out.println("Packets dropped due to pattern match.");
@@ -176,6 +197,7 @@ public class client {
 					return;
 					
 				default:
+					System.out.println("Wrong command. Use put, get, ls, and exit.");
 					continue;
 					
 				}

@@ -105,22 +105,46 @@ public class server_ids {
 				case "get":
 					// get file
 					Path getPath = Paths.get(fileFolder + "/" + filename);
-					byte[] getFile = Files.readAllBytes(getPath);
+					byte[] getFile;
+					String okMsg = "ok";
+					try {
+						getFile = Files.readAllBytes(getPath);
 					
-					// IDS portion: server -->> client
-					int checkGetReturnLength = ids.checkPattern(BigInteger.valueOf(getFile.length).toByteArray(),serverAddress);
-					int checkGetReturnFile = ids.checkPattern(getFile,serverAddress);
+						// IDS portion: server -->> client
+						int checkOK = ids.checkPattern(okMsg.getBytes(), serverAddress);
+						int checkGetReturnLength = ids.checkPattern(BigInteger.valueOf(getFile.length).toByteArray(),serverAddress);
+						int checkGetReturnFile = ids.checkPattern(getFile,serverAddress);
 					
-					if(checkGetReturnLength + checkGetReturnFile != 0) {
-						System.out.println("Pattern has been matched");
+						if(checkOK + checkGetReturnLength + checkGetReturnFile != 0) {
+							System.out.println("Pattern has been matched");
+							continue;
+						}
+					
+						// write file back to client
+						clientOut.writeUTF(okMsg);
+						clientOut.writeInt(getFile.length);
+						clientOut.write(getFile);
+					
 						continue;
 					}
-					
-					// write file back to client
-					clientOut.writeInt(getFile.length);
-					clientOut.write(getFile);
-					
-					continue;
+					catch (IOException e) {
+						String errorMsg = "File not found - check name of file.";
+						System.out.println("File: " + filename + " not found.");
+						
+						okMsg = "no";
+						
+						// IDS portion: server -->> client
+						int checkNO = ids.checkPattern(okMsg.getBytes(), serverAddress);
+						int checkErrorMsg = ids.checkPattern(errorMsg.getBytes(), serverAddress);
+						
+						if(checkNO + checkErrorMsg != 0) {
+							continue;
+						}
+						
+						// write okMSg and errorMsg
+						clientOut.writeUTF(okMsg);
+						clientOut.writeUTF(errorMsg);
+					}
 					
 					
 				case "ls":
