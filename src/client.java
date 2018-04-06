@@ -41,8 +41,6 @@ public class client {
 				command = commands[0];
 				if(commands.length == 2) {
 					filename = commands[1];
-					System.out.println(filename);
-					System.out.println(fileFolder);
 					filepath = Paths.get(fileFolder + "/" + filename);		
 				}
 				else if(commands.length >= 3) {
