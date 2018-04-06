@@ -52,7 +52,6 @@ public class client {
 				
 				case "put":
 					// load file
-					System.out.println(filepath.toString());
 					byte[] file;
 					try {
 						file = Files.readAllBytes(filepath);
