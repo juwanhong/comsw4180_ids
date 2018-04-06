@@ -44,7 +44,11 @@ public class client {
 					filepath = Paths.get(fileFolder + "/" + filename);		
 				}
 				else if(commands.length >= 3) {
-					System.out.println("Input invalid!");
+					System.out.println("Input invalid! Only up to 2 arguments valid.");
+					continue;
+				}
+				else if((command.equals("put") || command.equals("get")) && commands.length != 2) {
+					System.out.println("Input invalid. <put> and <get> requires a file name.");
 					continue;
 				}
 				
