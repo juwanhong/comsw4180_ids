@@ -19,7 +19,6 @@ public class client {
 			InetAddress idsIP = InetAddress.getByName(clientArgs[0]);
 			int idsPort = Integer.parseInt(clientArgs[1]);
 			String fileFolder = Paths.get("").toAbsolutePath().toString()+"/files";
-			String filename = "";
 			Path filepath = null;
 			
 			// Open socket to ids and input/output streams
@@ -35,6 +34,7 @@ public class client {
 			
 			
 			while(true) {
+				String filename = "";
 				System.out.print(">>> ");
 				commands1 = scanner.nextLine();
 				commands = commands1.split(" ");
@@ -130,7 +130,7 @@ public class client {
 					Path putPath = Paths.get(fileFolder + "/" + filename);
 					Files.write(putPath, serverFile);
 					
-					System.out.println("File saved to /files.");
+					System.out.println("File saved to server.");
 					
 					continue;
 					
