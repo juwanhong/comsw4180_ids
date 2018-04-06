@@ -51,6 +51,9 @@ public class client {
 					System.out.println("Input invalid. <put> and <get> requires a file name.");
 					continue;
 				}
+				else if((command.equals("ls") || command.equals("exit")) && commands.length != 1) {
+					System.out.println("Input invalid. <ls> and <exit> does not have any aruments.");
+				}
 				
 				switch(command) {
 				
