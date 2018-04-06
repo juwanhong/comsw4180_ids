@@ -37,7 +37,6 @@ public class client {
 			while(true) {
 				System.out.print(">>> ");
 				commands1 = scanner.nextLine();
-				System.out.println(commands1);
 				commands = commands1.split(" ");
 				command = commands[0];
 				if(commands.length == 2) {

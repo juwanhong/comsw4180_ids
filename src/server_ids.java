@@ -51,14 +51,12 @@ public class server_ids {
 				
 				// read first input: command
 				String command = clientIn.readUTF();
-				System.out.println("command: " + command);
 				// read file name
 				String filename = clientIn.readUTF();
 				// read client file size
 				int lengthClient = clientIn.readInt();
 				// read client packets
 				byte[] clientFile = new byte[lengthClient];
-				System.out.println("file length: " + lengthClient);
 				clientIn.read(clientFile);
 				
 				// IDS portion: client -->> server
