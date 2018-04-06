@@ -25,6 +25,7 @@ public class server_ids {
 			ServerSocket idsServerSocket = new ServerSocket(port);
 			
 			// Accept connection from client
+			System.out.println("Waiting for client connection...");
 			Socket clientSocket = idsServerSocket.accept();
 			String clientAddress = clientSocket.getRemoteSocketAddress().toString();
 			String serverAddress = clientSocket.getLocalAddress().toString();
